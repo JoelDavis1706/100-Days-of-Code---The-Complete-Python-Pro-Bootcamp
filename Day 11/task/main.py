@@ -8,7 +8,6 @@ def deal_card():
     return card
 
 def compare_score(u_score, d_score):
-
     if u_score == d_score:
         return "DRAW"
     elif d_score == 0:
