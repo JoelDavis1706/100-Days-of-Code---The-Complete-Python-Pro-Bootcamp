@@ -30,9 +30,6 @@ def guess_game(game_level):
     if not result:
         print(f"Sorry you Lost, the guess was {random_guess}")
 
-
-
-
 print("""Welcome to Number Guessing Game!\nI am thinking of a Number between 1 and 100""")
 difficulty = input("Choose a difficulty. Type 'easy' or 'hard':").lower()
 guess_game(difficulty)
