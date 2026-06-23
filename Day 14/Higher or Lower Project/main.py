@@ -2,8 +2,7 @@
 import random
 import art
 import game_data
-print(art.logo)
-SCORE = 0
+
 #generate random data from dictionary
 def gen_ran():
     random_option = random.choice(game_data.data)
@@ -12,17 +11,17 @@ def gen_ran():
 
 
 #Format the account into printable format
-def format(ran_A, ran_B):
+def display_accounts(ran_A, ran_B):
     print(f"Compare A:{ran_A['name']}, a {ran_A['description']}, from {ran_A['country']}")
     print(art.vs)
     print(f"Against B:{ran_B['name']}, a {ran_B['description']}, from {ran_B['country']}")
 
 #Ask user for a guess
 def ask_guess():
-    choice = input("Who has more followers? Type 'A' or 'B': ")
-    if choice == 'A':
+    choice = input("Who has more followers? Type 'A' or 'B': ").lower()
+    if choice == 'a':
         return "A"
-    elif choice == 'B':
+    elif choice == 'b':
         return "B"
 
 #Check if user is correct
@@ -50,14 +49,21 @@ def check(guess,ran_A,ran_B):
 
 random_A = gen_ran()
 random_B = gen_ran()
-
+if random_A == random_B:
+    random_A = gen_ran()
 game_over = False
-while game_over is not True:
-    format(random_A, random_B)
+while not game_over:
+    score = 0
+    print(art.logo)
+    display_accounts(random_A, random_B)
     guess = ask_guess()
-    if check(guess,random_A,random_B) == True:
-        SCORE += 1
-        print(f"You're right! Current Score:{SCORE}")
+    if check(guess,random_A,random_B):
+        score += 1
+        random_A = random_B
+        random_B = gen_ran()
+        print("\n" * 30)
+        print(f"You're right! Current Score:{score}")
+
     else:
-        print(f"Sorry, that's wrong.Final Score:{SCORE}")
+        print(f"Sorry, that's wrong.Final Score:{score}")
         game_over = True
